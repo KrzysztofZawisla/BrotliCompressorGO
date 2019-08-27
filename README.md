@@ -1,7 +1,7 @@
 # BrotliCompressorGO
 Brotli compressor but written in golang
 
-Used dependencies:
+## Used dependencies:
 flag  
 fmt  
 io/ioutil  
