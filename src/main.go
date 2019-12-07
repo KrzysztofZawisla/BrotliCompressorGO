@@ -10,6 +10,12 @@ import (
 	"gopkg.in/kothar/brotli-go.v0/enc"
 )
 
+func checkError(err error, text string) {
+	if err != nil {
+		log.Fatal(text)
+	}
+}
+
 var file = flag.String("file", "", "Path to file to compress")
 
 func main() {
@@ -20,25 +26,17 @@ func main() {
 	}
 	fileData, err := ioutil.ReadFile(*file)
 	fmt.Println("Reading data from file...")
-	if err != nil {
-		log.Fatal("Cannot read data from the file")
-	}
+	checkError(err, "Cannot read data from the file")
 	fmt.Println("Starting compressing...")
 	compressedData, err := enc.CompressBuffer(nil, fileData, make([]byte, 0))
-	if err != nil {
-		log.Fatal("Cannot compress data")
-	}
+	checkError(err, "Cannot compress data")
 	fmt.Println("The compression has ended")
 	fmt.Println("Creating new output file...")
 	newFile, err := os.Create(*file + ".br")
-	if err != nil {
-		log.Fatal("Cannot create new file with output data")
-	}
+	checkError(err, "Cannot create new file with output data")
 	defer newFile.Close()
 	fmt.Println("Writing to file...")
 	_, err = newFile.Write(compressedData)
-	if err != nil {
-		log.Fatal("Cannot write data to file")
-	}
+	checkError(err, "Cannot write data to file")
 	fmt.Println("Data has been saved successfully")
 }
