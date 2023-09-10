@@ -1,5 +1,6 @@
 # BrotliCompressorGO
-Brotli compressor but written in golang
+
+Simple CLI tool to compress files using Brotli algorithm. This program uses [Golang](https://go.dev/).
 
 ## Used dependencies:
 flag  
